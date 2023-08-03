@@ -1,0 +1,24 @@
+:-include('../includes.pl').
+
+% Analyzer
+
+analyze(String, MorphemeList):-
+    initial(State),
+    analyze(String, State, MorphemeList).
+
+analyze('', FinalState, []):-
+    final(FinalState).
+
+analyze(String, CurrentState, [Morpheme|Rest_Morpheme]):-
+   concat(Allomorph, Suffix, String),
+   not(Allomorph = ''),
+   (
+   allomorph(Allomorph, Morpheme);
+   harmony_except(Allomorph, Suffix, NewAllomorph),
+   allomorph(NewAllomorph, Morpheme)
+   ),
+   t(CurrentState, Morpheme, NextState),
+   harmonize(Allomorph, Suffix),
+   analyze(Suffix, NextState, Rest_Morpheme).
+
+

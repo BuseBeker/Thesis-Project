@@ -1,0 +1,16 @@
+:-include('/constants/consonants.pl').
+:-include('/constants/vowels.pl').
+:-include('/constants/exceptions.pl').
+:-include('/constants/consonant_types.pl').
+:-include('/utilities/string_to_first_char.pl').
+:-include('/morphological_analyzer/transitions.pl').
+:-include('/morphological_analyzer/allomorphs.pl').
+:-include('/morphological_analyzer/dictionary.pl').
+:-include('/harmonizers/harmonizer.pl').
+:-include('/harmonizers/consonant_consonant_harmonizer.pl').
+:-include('/harmonizers/consonant_vowel_harmonizer.pl').
+:-include('/harmonizers/vowel_consonant_harmonizer.pl').
+:-include('/harmonizers/vowel_vowel_harmonizer.pl').
+:-include('/harmonizers/consonant_softening_harmonizer.pl').
+:-include('/harmonizers/harmony_excepter.pl').
+:-include('/harmonizers/vowel_reduction_harmonizer.pl').

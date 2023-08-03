@@ -1,0 +1,122 @@
+:-encoding(utf8).
+
+/*
+** Checks whether Turkish Word is appropriate for vowel-vowel harmony
+** @param LAllomorph Left allomorph example: demir
+** @param RAllomorph List of the right allomorph example: den
+*/
+
+vowel_vowel_harmony(LAllomorph, _):-
+   consonant(LAllomorph).
+
+vowel_vowel_harmony(_, RAllomorph):-
+   consonant(RAllomorph).
+
+vowel_vowel_harmony(_, RAllomorph):-
+   atom_chars(RAllomorph, [RChar1, RChar2|_]),
+   RChar1 = 'k', RChar2 = 'i'.
+   
+vowel_vowel_harmony(LAllomorph, RAllomorph):-       % [k,a,l,e,m] l e r
+   atom_chars(LAllomorph, LList),
+   atom_chars(RAllomorph, [RChar1, RChar2 |_]),
+   reverse(LList, [LChar1|_]),
+   vowel(LChar1),
+   consonant(RChar1),
+   vowel(RChar2),
+  ((
+   ((LChar1 = 'a'; LChar1 = 'ı'), (RChar2 = 'a'; RChar2 = 'ı'));
+   ((LChar1 = 'o'; LChar1 = 'u'), (RChar2 = 'a'; RChar2 = 'u'));
+   ((LChar1 = 'e'; LChar1 = 'i'), (RChar2 = 'e'; RChar2 = 'i'));
+   ((LChar1 = 'ö'; LChar1 = 'ü'), (RChar2 = 'e'; RChar2 = 'ü'))
+  ) -> true ; RChar1 = 'y', RChar2 = 'o').
+
+vowel_vowel_harmony(LAllomorph, RAllomorph):-
+   atom_chars(LAllomorph, LList),
+   atom_chars(RAllomorph, [RChar1, RChar2|_]),
+   reverse(LList, [LChar1, LChar2|_]),
+   consonant(LChar1),
+   vowel(LChar2),
+   consonant(RChar1),
+   vowel(RChar2),
+  (((LChar2 = 'a'; LChar2 = 'ı'), (RChar2 = 'a'; RChar2 = 'ı'));
+   ((LChar2 = 'o'; LChar2 = 'u'), (RChar2 = 'a'; RChar2 = 'u'));
+   ((LChar2 = 'e'; LChar2 = 'i'), (RChar2 = 'e'; RChar2 = 'i'));
+   ((LChar2 = 'ö'; LChar2 = 'ü'), (RChar2 = 'e'; RChar2 = 'ü'))
+   ).
+   
+
+vowel_vowel_harmony(LAllomorph, RAllomorph):-
+   atom_chars(LAllomorph, LList),
+   atom_chars(RAllomorph, [RChar1, RChar2|_]),
+   reverse(LList, [LChar1, LChar2, LChar3|_]),
+   consonant(LChar1),
+   consonant(LChar2),
+   vowel(LChar3),
+   consonant(RChar1),
+   vowel(RChar2),
+  (((LChar3 = 'a'; LChar3 = 'ı'), (RChar2 = 'a'; RChar2 = 'ı'));
+   ((LChar3 = 'o'; LChar3 = 'u'), (RChar2 = 'a'; RChar2 = 'u'));
+   ((LChar3 = 'e'; LChar3 = 'i'), (RChar2 = 'e'; RChar2 = 'i'));
+   ((LChar3 = 'ö'; LChar3 = 'ü'), (RChar2 = 'e'; RChar2 = 'ü'))
+   ).
+   
+
+vowel_vowel_harmony(LAllomorph, RAllomorph):-
+   atom_chars(LAllomorph, LList),
+   atom_chars(RAllomorph, [RChar1|_]),
+   reverse(LList, [LChar1, LChar2, LChar3|_]),
+   consonant(LChar1),
+   consonant(LChar2),
+   vowel(LChar3),
+   vowel(RChar1),
+  (((LChar3 = 'a'; LChar3 = 'ı'), (RChar1 = 'a'; RChar1 = 'ı'));
+   ((LChar3 = 'o'; LChar3 = 'u'), (RChar1 = 'a'; RChar1 = 'u'));
+   ((LChar3 = 'e'; LChar3 = 'i'), (RChar1 = 'e'; RChar1 = 'i'));
+   ((LChar3 = 'ö'; LChar3 = 'ü'), (RChar1 = 'e'; RChar1 = 'ü'))
+   ).
+
+
+vowel_vowel_harmony(LAllomorph, RAllomorph):-
+   atom_chars(LAllomorph, LList),
+   atom_chars(RAllomorph, [RChar1|_]),
+   reverse(LList, [LChar1, LChar2|_]),
+   consonant(LChar1),
+   vowel(LChar2),
+   vowel(RChar1),
+  (((LChar2 = 'a'; LChar2 = 'ı'), (RChar1 = 'a'; RChar1 = 'ı'));
+   ((LChar2 = 'o'; LChar2 = 'u'), (RChar1 = 'a'; RChar1 = 'u'));
+   ((LChar2 = 'e'; LChar2 = 'i'), (RChar1 = 'e'; RChar1 = 'i'));
+   ((LChar2 = 'ö'; LChar2 = 'ü'), (RChar1 = 'e'; RChar1 = 'ü'))
+   ).
+   
+
+vowel_vowel_harmony(LAllomorph, RAllomorph):-
+   atom_chars(LAllomorph, LList),
+   atom_chars(RAllomorph, [RChar1, RChar2, RChar3|_]),
+   reverse(LList, [LChar1,LChar2|_]),
+   vowel(LChar1),
+   consonant(LChar2),
+   consonant(RChar1),
+   consonant(RChar2),
+   vowel(RChar3),
+  (((LChar1 = 'a'; LChar1 = 'ı'), (RChar3 = 'a'; RChar3 = 'ı'));
+   ((LChar1 = 'o'; LChar1 = 'u'), (RChar3 = 'a'; RChar3 = 'u'));
+   ((LChar1 = 'e'; LChar1 = 'i'), (RChar3 = 'e'; RChar3 = 'i'));
+   ((LChar1 = 'ö'; LChar1 = 'ü'), (RChar3 = 'e'; RChar3 = 'ü'))
+   ).
+   
+vowel_vowel_harmony(LAllomorph, RAllomorph):-
+   atom_chars(LAllomorph, LList),
+   atom_chars(RAllomorph, [RChar1, RChar2, RChar3|_]),
+   reverse(LList, [LChar1|_]),
+   vowel(LChar1),
+   consonant(RChar1),
+   consonant(RChar2),
+   vowel(RChar3),
+  (((LChar1 = 'a'; LChar1 = 'ı'), (RChar3 = 'a'; RChar3 = 'ı'));
+   ((LChar1 = 'o'; LChar1 = 'u'), (RChar3 = 'a'; RChar3 = 'u'));
+   ((LChar1 = 'e'; LChar1 = 'i'), (RChar3 = 'e'; RChar3 = 'i'));
+   ((LChar1 = 'ö'; LChar1 = 'ü'), (RChar3 = 'e'; RChar3 = 'ü'))
+   ).
+
+
